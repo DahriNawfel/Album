@@ -10,7 +10,7 @@ class ChatModel {
     private string $endpoint;
 
     public function __construct() {
-        $this->apiKey = $_ENV['OPENAI_API_KEY'];
+        $this->apiKey = getenv('OPENAI_API_KEY');
         $this->endpoint = 'https://api.openai.com/v1/chat/completions';
         
         if (empty($this->apiKey)) {

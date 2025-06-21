@@ -87,7 +87,7 @@ class resetpasswordController {
 
         
         try {
-            const response = await fetch(`${this.apiUrl}/auth/resetPassword`, {
+            const response = await fetch(`/api/auth/resetPassword`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

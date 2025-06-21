@@ -112,7 +112,7 @@ class ReinitialiseMdpController {
         form.classList.add('loading');
         
         try {
-            const response = await fetch(`${this.apiUrl}/auth/renitialisePassword`, {
+            const response = await fetch(`/api/auth/renitialisePassword`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

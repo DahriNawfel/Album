@@ -19,7 +19,7 @@ class UserController {
     }
     async checkAuth() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/checkAuth`, {
+            const response = await fetch(`/api/auth/checkAuth`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ class UserController {
 
     async getUserInfo() {
         try {
-            const response = await fetch(`${this.apiUrl}/user-info`, {
+            const response = await fetch(`/api/user-info`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -63,7 +63,7 @@ class UserController {
 
     async logout() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/logout`, {
+            const response = await fetch(`/api/auth/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ class UserController {
 
     async fetchUserProfile() {
         try {
-            const response = await fetch(`${this.apiUrl}/me`, {
+            const response = await fetch(`/api/me`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -415,7 +415,7 @@ class UserController {
             submitBtn.innerHTML = '<span class="btn-text">Updating profile...</span>';
 
             // Send everything in one request to PUT /user/:id
-            const response = await fetch(`${this.apiUrl}/user/${this.user.id}`, {
+            const response = await fetch(`/api/user/${this.user.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

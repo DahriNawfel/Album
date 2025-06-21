@@ -70,7 +70,7 @@ class MyAlbumController {
 
     async checkAuth() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/checkAuth`, {
+            const response = await fetch(`/api/auth/checkAuth`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ class MyAlbumController {
 
     async getUserInfo() {
         try {
-            const response = await fetch(`${this.apiUrl}/user-info`, {
+            const response = await fetch(`/api/user-info`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -124,7 +124,7 @@ class MyAlbumController {
 
     async fetchCurrentUserData() {
         try {
-            const response = await fetch(`${this.apiUrl}/me`, {
+            const response = await fetch(`/api/me`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -211,7 +211,7 @@ class MyAlbumController {
 
     async logout() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/logout`, {
+            const response = await fetch(`/api/auth/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -406,7 +406,7 @@ class MyAlbumController {
 
     async fetchMyAlbums() {
         try {
-            const response = await fetch(`${this.apiUrl}/myalbums`, {
+            const response = await fetch(`/api/myalbums`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -532,7 +532,7 @@ class MyAlbumController {
             
             let response;
             if (albumId) {
-                response = await fetch(`${this.apiUrl}/album/${albumId}`, {
+                response = await fetch(`/api/album/${albumId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -541,7 +541,7 @@ class MyAlbumController {
                     body: JSON.stringify(data)
                 });
             } else {
-                response = await fetch(`${this.apiUrl}/album`, {
+                response = await fetch(`/api/album`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -617,7 +617,7 @@ class MyAlbumController {
         }
 
         try {
-            const response = await fetch(`${this.apiUrl}/album/${albumId}`, {
+            const response = await fetch(`/api/album/${albumId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

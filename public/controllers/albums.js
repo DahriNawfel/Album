@@ -3,8 +3,6 @@ import AlbumView from "../views/album.js";
 class AlbumController {
     constructor() {
         this.app = document.querySelector('#app');
-
-        this.apiUrl = 'http://localhost:81';
         this.albums = [];
         this.albumView = new AlbumView();
         this.currentUserData = null;
@@ -23,7 +21,7 @@ class AlbumController {
     async getUserInfo() {
 
         try {
-            const response = await fetch(`${this.apiUrl}/user-info`, {
+            const response = await fetch(`/api/user-info`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -42,7 +40,7 @@ class AlbumController {
 
 
     async checkAuth() {
-        fetch(`${this.apiUrl}/auth/checkAuth`, {
+        fetch(`/api/auth/checkAuth`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +62,7 @@ class AlbumController {
 
     async logout() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/logout`, {
+            const response = await fetch(`/api/auth/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +81,7 @@ class AlbumController {
 
     async fetchCurrentUserData() {
         try {
-            const response = await fetch(`${this.apiUrl}/me`, {
+            const response = await fetch(`/api/me`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -159,7 +157,7 @@ class AlbumController {
 
     async fetchAlbums() {
         try {
-            const response = await fetch(`${this.apiUrl}/albums`, {
+            const response = await fetch(`/api/albums`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

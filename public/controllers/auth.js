@@ -14,7 +14,7 @@ class AuthController {
     }
     async checkAuth() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/checkAuth`, {
+            const response = await fetch(`/api/auth/checkAuth`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ class AuthController {
             if (!this.isLoginMode) {
                 body.secret = secret;
             }
-            const response = await fetch(`${this.apiUrl}${endpoint}`, {
+            const response = await fetch(`/api${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

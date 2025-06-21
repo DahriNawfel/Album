@@ -26,7 +26,7 @@ class HomeController {
     async getUserInfo() {
 
         try {
-            const response = await fetch(`${this.apiUrl}/user-info`, {
+            const response = await fetch(`/api/user-info`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -44,7 +44,7 @@ class HomeController {
     }
 
     async checkAuth() {
-        fetch(`${this.apiUrl}/auth/checkAuth`, {
+        fetch(`/api/auth/checkAuth`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ class HomeController {
 
     async logout() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/logout`, {
+            const response = await fetch(`/api/auth/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ class HomeController {
 
     async fetchAlbums() {
         try {
-            const response = await fetch(`${this.apiUrl}/albums`, {
+            const response = await fetch(`/api/albums`, {
                 headers: {
                     'Content-Type': 'application/json',
                     
@@ -133,7 +133,7 @@ class HomeController {
 
     async fetchMyAlbums() {
         try {
-            const response = await fetch(`${this.apiUrl}/myalbums`, {
+            const response = await fetch(`/api/myalbums`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

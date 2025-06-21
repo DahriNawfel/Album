@@ -35,7 +35,7 @@ class ViewAlbumController {
 
     async checkAuth() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/checkAuth`, {
+            const response = await fetch(`/api/auth/checkAuth`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ class ViewAlbumController {
 
     async getUserInfo() {
         try {
-            const response = await fetch(`${this.apiUrl}/user-info`, {
+            const response = await fetch(`/api/user-info`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -102,7 +102,7 @@ class ViewAlbumController {
 
     async logout() {
         try {
-            const response = await fetch(`${this.apiUrl}/auth/logout`, {
+            const response = await fetch(`/api/auth/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -350,7 +350,7 @@ class ViewAlbumController {
 
     async sendImageToChatGPT(imageBase64, question) {
         try {
-            const response = await fetch(`${this.apiUrl}/chat/image`, {
+            const response = await fetch(`/api/chat/image`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -503,7 +503,7 @@ class ViewAlbumController {
     async fetchAlbumData() {
         try {
             // Récupérer les détails de l'album
-            const albumResponse = await fetch(`${this.apiUrl}/album/${this.albumId}`, {
+            const albumResponse = await fetch(`/api/album/${this.albumId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -522,7 +522,7 @@ class ViewAlbumController {
             this.isOwner = this.checkOwnership();
             
             // Récupérer les photos de l'album
-            const photosResponse = await fetch(`${this.apiUrl}/byalbum/${this.albumId}`, {
+            const photosResponse = await fetch(`/api/byalbum/${this.albumId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -676,7 +676,7 @@ class ViewAlbumController {
         };
 
 
-        const response = await fetch(`${this.apiUrl}/picture`, {
+        const response = await fetch(`/api/picture`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -746,7 +746,7 @@ class ViewAlbumController {
         confirmBtn.textContent = 'Deleting...';
 
         try {
-            const response = await fetch(`${this.apiUrl}/picture/${photoId}`, {
+            const response = await fetch(`/api/picture/${photoId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

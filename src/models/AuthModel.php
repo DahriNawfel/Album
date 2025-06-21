@@ -115,7 +115,7 @@ class AuthModel extends SqlConnect {
     $saltedPassword = $newPassword . $this->passwordSalt;
     $hashedPassword = password_hash($saltedPassword, PASSWORD_BCRYPT);
 
-    $query = "UPDATE $this->table SET password = :password WHERE reset_token = :token AND reset_token_expires > NOW()";
+    $query = "UPDATE $this->table SET password = :password WHERE reset_token = :token AND reset_token_expires > (NOW() - INTERVAL 2 HOUR)";
     $req = $this->db->prepare($query);
     $req->execute([
       'token' => $token,

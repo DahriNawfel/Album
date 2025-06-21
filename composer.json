@@ -1,18 +1,18 @@
 {
     "require": {
-      "php": ">=7.4",
-      "ext-pdo": "*",
-      "ext-json": "*",
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-json": "*",
         "vlucas/phpdotenv": "^5.6"
     },
     "autoload": {
-      "psr-4": {
-        "App\\": "src/",
-        "App\\Controllers\\": "src/controllers/",
-        "App\\Models\\": "src/models/",
-        "App\\Utils\\": "src/utils/",
-        "App\\Middlewares\\": "src/middlewares/"
-
-      }
+        "psr-4": {
+            "App\\": "src/",
+            "App\\Controllers\\": "src/controllers/",
+            "App\\Models\\": "src/models/",
+            "App\\Utils\\": "src/utils/",
+            "App\\Middlewares\\": "src/middlewares/"
+        }
     }
-  }
+}

@@ -1,7 +1,9 @@
 {
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.7.3"
+      "runtime": "vercel-php@0.7.3",
+      "excludeFiles": "**.{jpg,jpeg,png,gif,svg,ico,woff,woff2,ttf,eot}",
+      "includeFiles": "src/**"
     }
   },
   "rewrites": [
@@ -20,7 +22,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": "https://album-l2pu.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods", 
@@ -28,17 +30,25 @@
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
+          "value": "Content-Type, Authorization, X-Requested-With"
         },
         {
           "key": "Access-Control-Max-Age",
           "value": "86400"
         },
         {
-            "key": "Access-Control-Allow-Credentials",
-            "value": "true"
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
         }
       ]
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "COMPOSER_CACHE_DIR": "/tmp/.composer"
+    }
+  },
+  "env": {
+    "VERCEL_PHP_EXTENSIONS": "pdo_pgsql"
+  }
 }

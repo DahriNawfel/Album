@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Models;
+
+use \PDO;
+use stdClass;
+
+class PictureModel extends SqlConnect {
+    private $table = "pictures";
+    public $authorized_fields_to_update = ['album_id', 'picture'];
+
+    public function create(array $data) {
+      $query = "
+        INSERT INTO $this->table (user_id, album_id, picture)
+        VALUES (:user_id, :album_id, :picture)
+      ";
+
+      $req = $this->db->prepare($query);
+      $req->execute($data);
+      return $this->getLast();
+    }
+
+    public function delete(int $id) {
+      $req = $this->db->prepare("DELETE FROM $this->table WHERE id = :id");
+      $req->execute(["id" => $id]);
+      return new stdClass();
+    }
+
+    public function getById(int $id) {
+      $req = $this->db->prepare("SELECT * FROM $this->table WHERE id = :id ");
+      $req->execute(["id" => $id]);
+
+      return $req->rowCount() > 0 ? $req->fetch(PDO::FETCH_ASSOC) : new stdClass();
+    }
+    public function getByAlbumId(int $albumId) {
+        $req = $this->db->prepare("SELECT * FROM $this->table WHERE album_id = :id");
+        $req->execute(["id" => $albumId]);
+        
+        return $req->rowCount() > 0 ? $req->fetchAll(PDO::FETCH_ASSOC) : new stdClass();
+    }
+
+    public function getAll(?int $limit = null) {
+      $query = "SELECT * FROM {$this->table}";
+      
+      if ($limit !== null) {
+          $query .= " LIMIT :limit";
+          $params = [':limit' => (int)$limit];
+      } else {
+          $params = [];
+      }
+      
+      $req = $this->db->prepare($query);
+      foreach ($params as $key => $value) {
+          $req->bindValue($key, $value, PDO::PARAM_INT);
+      }
+      $req->execute();
+      
+      return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getLast() {
+      $req = $this->db->prepare("SELECT * FROM $this->table ORDER BY id DESC LIMIT 1");
+      $req->execute();
+
+      return $req->rowCount() > 0 ? $req->fetch(PDO::FETCH_ASSOC) : new stdClass();
+    }
+
+    public function update(array $data, int $id) {
+      $request = "UPDATE $this->table SET ";
+      $params = [];
+      $fields = [];
+      
+      # Prepare the query dynamically based on the provided data
+      foreach ($data as $key => $value) {
+          if (in_array($key, $this->authorized_fields_to_update)) {
+          $fields[] = "$key = :$key";
+          $params[":$key"] = $value;
+          }
+      }
+      
+      if (empty($fields)) {
+          throw new \Exception("No valid fields to update");
+      }
+      
+      $params[':id'] = $id;
+      $query = $request . implode(", ", $fields) . " WHERE id = :id";
+      
+      $req = $this->db->prepare($query);
+      $req->execute($params);
+      
+      return $this->getById($id);
+  }
+}

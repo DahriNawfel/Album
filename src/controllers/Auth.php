@@ -50,8 +50,8 @@ class Auth extends Controller {
         setcookie("token", $token['token'], [
             'expires' => time() + 86400,
             'path' => '/',
-            'domain' => 'localhost',
-            'secure' => false,
+            'domain' => 'album-l2pu.vercel.app',
+            'secure' => true,
             'httponly' => true,
             'samesite' => 'lax'
         ]);
@@ -77,8 +77,8 @@ class Auth extends Controller {
             setcookie("token", "", [
                 'expires' => time() - 3600,
                 'path' => '/',
-                'domain' => 'localhost',
-                'secure' => false,
+                'domain' => 'album-l2pu.vercel.app',
+                'secure' => true,
                 'httponly' => true,
                 'samesite' => 'lax'
             ]);

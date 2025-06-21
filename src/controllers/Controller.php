@@ -35,7 +35,7 @@ class Controller {
     protected function header() {
         // Gestion des requêtes OPTIONS (preflight)
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Origin: https://album-l2pu.vercel.app');
             header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
             header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
             header('Access-Control-Allow-Credentials: true');
@@ -45,7 +45,7 @@ class Controller {
         }
         
         // Headers CORS pour toutes les autres requêtes
-        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Origin: https://album-l2pu.vercel.app');
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
         header('Access-Control-Allow-Credentials: true');

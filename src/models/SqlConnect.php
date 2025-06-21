@@ -3,42 +3,31 @@
 namespace App\Models;
 
 use \PDO;
-use \Exception;
 
 class SqlConnect {
   public object $db;
+  private string $host;
+  private string $port;
+  private string $dbname;
+  private string $password;
+  private string $user;
 
   public function __construct() {
-    $databaseUrl = getenv('DATABASE_URL');
-    
-    if (!$databaseUrl) {
-      throw new Exception('La variable d\'environnement DATABASE_URL n\'est pas définie.');
-    }
+    $this->host = getenv('DB_HOST');
+    $this->dbname = getenv('DB_NAME');
+    $this->user = getenv('DB_USER');
+    $this->password = getenv('DB_PASSWORD');
+    $this->port = getenv('DB_PORT');
 
-    try {
-      // Essayer de créer la connexion PDO directement
-      $this->db = new PDO($databaseUrl);
-      $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $this->db->setAttribute(PDO::ATTR_PERSISTENT, false);
-      
-      // Test de connexion
-      $this->db->query('SELECT 1');
-      
-    } catch (Exception $e) {
-      // Si PDO ne fonctionne pas, afficher plus d'informations
-      $availableDrivers = PDO::getAvailableDrivers();
-      $extensions = [
-        'pdo' => extension_loaded('pdo'),
-        'pdo_pgsql' => extension_loaded('pdo_pgsql'),
-        'pgsql' => extension_loaded('pgsql')
-      ];
-      
-      $errorMsg = 'Erreur de connexion à la base de données: ' . $e->getMessage();
-      $errorMsg .= ' | Drivers PDO disponibles: ' . implode(', ', $availableDrivers);
-      $errorMsg .= ' | Extensions: ' . json_encode($extensions);
-      
-      throw new Exception($errorMsg);
-    }
+    $dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->dbname;
+    $this->db = new PDO(
+      $dsn,
+      $this->user,
+      $this->password
+    );
+
+    $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $this->db->setAttribute(PDO::ATTR_PERSISTENT, false);
   }
 
   public function transformDataInDot($data) {
@@ -49,16 +38,5 @@ class SqlConnect {
     }
 
     return $dataFormated;
-  }
-  
-  // Méthode pour vérifier les extensions disponibles (utile pour le debug)
-  public static function checkExtensions() {
-    $extensions = [
-      'pdo' => extension_loaded('pdo'),
-      'pdo_pgsql' => extension_loaded('pdo_pgsql'),
-      'pgsql' => extension_loaded('pgsql')
-    ];
-    
-    return $extensions;
   }
 }

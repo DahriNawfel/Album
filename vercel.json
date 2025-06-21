@@ -1,9 +1,12 @@
 {
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.7.3",
+      "runtime": "vercel-php@0.8.0",
       "excludeFiles": "**.{jpg,jpeg,png,gif,svg,ico,woff,woff2,ttf,eot}",
-      "includeFiles": "src/**"
+      "includeFiles": "src/**",
+      "env": {
+        "VERCEL_PHP_EXTENSIONS": "pdo,pdo_pgsql,pgsql"
+      }
     }
   },
   "rewrites": [

@@ -19,7 +19,7 @@ class SqlConnect {
     $this->password = getenv('DB_PASSWORD');
     $this->port = getenv('DB_PORT');
 
-    $dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->dbname;
+    $dsn = 'pgsql:host='.$this->host.';port='.$this->port.';dbname='.$this->dbname;
     $this->db = new PDO(
       $dsn,
       $this->user,

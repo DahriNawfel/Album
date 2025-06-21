@@ -41,7 +41,7 @@ class Authview {
                         </button>
 
                         <div class="auth-footer">
-                            <a href="http://localhost:3000/resetpassword" id="forgotPassword" class="auth-link">
+                            <a href="https://album-l2pu.vercel.app/resetpassword" id="forgotPassword" class="auth-link">
                                 Mot de passe oublié ?
                             </a>
                         </div>

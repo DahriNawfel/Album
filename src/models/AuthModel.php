@@ -81,15 +81,9 @@ class AuthModel extends SqlConnect {
 
     if($user) {
       $saltedsecret = $secret . $this->passwordSalt;
-        $debugInfo = [
-            'secret_sent' => $saltedsecret,
-            'secret_length' => strlen($secret),
-            'secret_in_db' => ($user['secret']),
-            'verify_result' => password_verify($secret, $user['secret'])
-        ];
         
         if (!password_verify($saltedsecret, $user['secret'])) {
-            throw new HttpException("Invalid secret." . json_encode($debugInfo), 400);
+            throw new HttpException("Invalid secret.", 400);
         }
         $resetToken = bin2hex(random_bytes(16));
         $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));

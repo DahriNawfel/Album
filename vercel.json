@@ -49,6 +49,6 @@
     }
   },
   "env": {
-    "VERCEL_PHP_EXTENSIONS": "pdo_pgsql"
+    "VERCEL_PHP_EXTENSIONS": "pdo,pdo_pgsql,pgsql"
   }
 }

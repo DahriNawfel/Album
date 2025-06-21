@@ -9,11 +9,6 @@ class SqlConnect {
   public object $db;
 
   public function __construct() {
-    // Vérifier si l'extension PDO PostgreSQL est disponible
-    if (!extension_loaded('pdo_pgsql')) {
-      throw new Exception('L\'extension PDO PostgreSQL n\'est pas disponible. Vérifiez votre configuration Vercel.');
-    }
-
     $databaseUrl = getenv('DATABASE_URL');
     
     if (!$databaseUrl) {
@@ -21,6 +16,7 @@ class SqlConnect {
     }
 
     try {
+      // Essayer de créer la connexion PDO directement
       $this->db = new PDO($databaseUrl);
       $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->db->setAttribute(PDO::ATTR_PERSISTENT, false);
@@ -29,7 +25,19 @@ class SqlConnect {
       $this->db->query('SELECT 1');
       
     } catch (Exception $e) {
-      throw new Exception('Erreur de connexion à la base de données: ' . $e->getMessage());
+      // Si PDO ne fonctionne pas, afficher plus d'informations
+      $availableDrivers = PDO::getAvailableDrivers();
+      $extensions = [
+        'pdo' => extension_loaded('pdo'),
+        'pdo_pgsql' => extension_loaded('pdo_pgsql'),
+        'pgsql' => extension_loaded('pgsql')
+      ];
+      
+      $errorMsg = 'Erreur de connexion à la base de données: ' . $e->getMessage();
+      $errorMsg .= ' | Drivers PDO disponibles: ' . implode(', ', $availableDrivers);
+      $errorMsg .= ' | Extensions: ' . json_encode($extensions);
+      
+      throw new Exception($errorMsg);
     }
   }
 

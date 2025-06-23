@@ -66,7 +66,7 @@ class AlbumModel extends SqlConnect {
             $req = $this->db->prepare("SELECT * FROM $this->table WHERE id = :id");
             $req->execute(["id" => $id]);
         } else {
-            $req = $this->db->prepare("SELECT * FROM $this->table WHERE id = :id AND (privacy != :privacy or user_id != :user_id)");
+            $req = $this->db->prepare("SELECT * FROM $this->table WHERE id = :id AND (privacy != :privacy or user_id = :user_id)");
             $req->execute(["id" => $id, "privacy" => 1, "user_id" => $user_id]);
 
         }

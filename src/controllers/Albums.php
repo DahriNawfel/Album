@@ -89,7 +89,7 @@ class Albums extends Controller {
         throw new HttpException("Post not found.", 404);
       }
       if ($album["user_id"] !== $user_id && $this->currentUser['role'] !== 'admin') {
-        throw new HttpException("You are not authorized to update this post.", 403);
+        throw new HttpException($user_id . ' ' . $album['user_id'], 403);
       }
       try {
         $id = intval($this->params['id']);

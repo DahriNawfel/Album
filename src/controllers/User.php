@@ -63,7 +63,7 @@ class User extends Controller {
             throw new HttpException("No data provided for update.", 400);
         }
 
-        if ($userId !== (int)($this->currentUser['user_id']) && $this->currentUser['role'] !== 'admin') {
+        if ($userId != $this->currentUser['user_id'] && $this->currentUser['role'] != 'admin') {
             throw new HttpException("You are not authorized to update this user.", 403);
         }
 
@@ -75,7 +75,7 @@ class User extends Controller {
     public function deleteUser() {
         $userId = intval($this->params['id']);
 
-        if ($userId !== $this->currentUser['user_id'] && $this->currentUser['role'] !== 'admin') {
+        if ($userId != $this->currentUser['user_id'] && $this->currentUser['role'] != 'admin') {
             throw new HttpException("You are not authorized to delete this user.", 403);
         }
 

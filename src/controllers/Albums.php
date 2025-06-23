@@ -42,7 +42,7 @@ class Albums extends Controller {
       if (gettype($album)!=='array') {
         throw new HttpException("Album not found.", 404);
       }
-      if ($album["user_id"] !== $user_id && $this->currentUser['role'] !== 'admin') {
+      if ($album["user_id"] != $user_id && $this->currentUser['role'] != 'admin') {
         throw new HttpException("You are not authorized to delete this post.", 403);
       }
       return $this->album->delete(intval($this->params['id']));

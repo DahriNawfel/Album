@@ -41,7 +41,7 @@ class Pictures extends Controller {
       if (gettype($picture)!=='array') {
         throw new HttpException("Post not found.", 404);
       }
-      if ($picture["user_id"] !== $user_id && $this->currentUser['role'] !== 'admin') {
+      if ($picture["user_id"] != $user_id && $this->currentUser['role'] != 'admin') {
         throw new HttpException("You are not authorized to delete this post.", 403);
       }
       return $this->picture->delete(intval($this->params['id']));
@@ -76,7 +76,7 @@ class Pictures extends Controller {
       if (gettype($picture)!='array') {
         throw new HttpException("Post not found.", 404);
       }
-      if ($picture["user_id"] !== $user_id && $this->currentUser['role'] !== 'admin') {
+      if ($picture["user_id"] != $user_id && $this->currentUser['role'] != 'admin') {
         throw new HttpException("You are not authorized to update this post.", 403);
       }
       try {

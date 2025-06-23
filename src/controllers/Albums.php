@@ -88,7 +88,7 @@ class Albums extends Controller {
       if (gettype($album)!='array') {
         throw new HttpException("Post not found.", 404);
       }
-      if ($album["user_id"] !== $user_id && $this->currentUser['role'] !== 'admin') {
+      if ($album["user_id"] != $user_id && $this->currentUser['role'] != 'admin') {
         throw new HttpException($user_id . ' ' . $album['user_id'], 403);
       }
       try {

@@ -38,7 +38,9 @@ class Albums extends Controller {
   public function deleteAlbum() {
 
       $user_id = $this->currentUser['user_id'];
-      $album = $this->album->getById(intval($this->params['id']));
+      $role = $this->currentUser['role'];
+      $data = ['user_id' => $user_id, 'role' => $role];
+      $album = $this->album->getById(intval($this->params['id']), $data);
       if (gettype($album)!=='array') {
         throw new HttpException("Album not found.", 404);
       }

@@ -62,7 +62,7 @@ class AlbumModel extends SqlConnect {
         } else {
           $user_id = $data['user_id'];
         }
-        if (!empty($data['role']) && $data['role'] === 'admin') {
+        if (!empty($data['role']) && $data['role'] == 'admin') {
             $req = $this->db->prepare("SELECT * FROM $this->table WHERE id = :id");
             $req->execute(["id" => $id]);
         } else {

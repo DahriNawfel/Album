@@ -25,7 +25,7 @@ class User extends Controller {
     }
 
 
-    #[Route("GET", "/user/:id", [AuthMiddleware::class])]
+    #[Route("GET", "/user/:id")]
     public function getUserById() {
         $userId = intval($this->params['id']);
         $user = $this->user->getById($userId);
